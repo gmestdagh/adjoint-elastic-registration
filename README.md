@@ -56,7 +56,7 @@ finite element package is necessary to run them.
 * `liver_simple.py`: Single estimation of a very local force distribution
   involving a liver mesh. See [the paper](https://hal.inria.fr/hal-03691913), 
   Section 3.2, for more details about data generation.
-  Results are saved in the folder `results/liver_simple`.
+  Results are saved in `results/liver_simple`.
 
 * `liver_sequence.py`: Test case presented in section 3.2 of 
   [the paper](https://hal.inria.fr/hal-03691913). The resultant force is
@@ -72,6 +72,15 @@ finite element package is necessary to run them.
   finite element framework (code works with version v20.12), along with
   [SofaPython3](https://github.com/sofa-framework/sofapython3) and the
   [Caribou](https://github.com/mimesis-inria/caribou) plugin.
+
+* `liver_sequence_nhk.py`: Same as `liver_sequence.py`, but the dataset and the
+  reconstruction both feature a Neo-Hookean model for deformations.
+  To run this case, you should have the Dolfin package installed (the old one, 
+  not dolfinx).
+  Note that this case is very slow and takes several hours to complete.
+  You should consider running it during the night. 
+  Also, do not worry about the "Newton solver did not converge warning", the
+  residual tolerance has been set very tight on purpose.
 
 As the access to the Sparse Data Challenge dataset is restricted by the
 organizers, we do not provide an example associated with this test case.

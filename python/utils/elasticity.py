@@ -9,17 +9,7 @@ import meshio
 ###############################################################################
 # BOUNDARY CONDITIONS
 ###############################################################################
-class NoBoundaryCondition:
-    """Absence of boundary condition."""
-
-    def __init__(self):
-        pass
-
-    def add_penalization_to_matrix(self, k):
-        pass
-
-
-class DirichletBoundaryCondition(NoBoundaryCondition):
+class DirichletBoundaryCondition:
     """A class to handle Dirichlet Boundary conditions."""
 
     def __init__(self, vertices: np.array):
@@ -55,7 +45,7 @@ class LinearElasticModel:
     """
 
     def __init__(self, mesh_filename: str, matrix_filename: str,
-                 bc=NoBoundaryCondition()):
+                 bc: DirichletBoundaryCondition):
         """Load a stiffness matrix from a file and apply boundary conditions.
 
         :param mesh_filename:

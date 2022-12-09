@@ -6,23 +6,27 @@ DATA_FOLDER = join(dirname(__file__), '../../../data/liver')
 RESULTS_FOLDER = join(dirname(__file__), '../../../results/liver')
 
 
-def load_sequence(seq_name: str, which_mesh='remeshed'):
+def load_sequence(seq_name: str, which_mesh='remeshed', model='linear',
+                  mesh_format='msh'):
     """Load a sequence of point clouds for successive estimations.
 
     :param seq_name: Index of the sequence
     :param which_mesh: mesh to load ['default', 'remeshed']
+    :param model: which elastic model to use ['linear', 'neohookean']
+    :param mesh_format: which mesh format to load. Use 'msh' for use with SOFA
+        and 'xdmf' for use with Fenics/Dolfin ['msh', 'xdmf']
     """
 
     # Load dirichlet vertices and matching triangles from mesh folder
     mesh_folder = join(DATA_FOLDER, f'mesh-{which_mesh}')
 
-    mesh_filename = join(mesh_folder, 'liver.msh')
+    mesh_filename = join(mesh_folder, f'liver.{mesh_format}')
     dirichlet_vertices = np.load(join(mesh_folder, 'dirichlet-vertices.npy'))
     matching_triangles = np.load(join(mesh_folder, 'matching-triangles.npy'))
     stiffness_filename = join(mesh_folder, 'stiffness_matrix.npz')
 
     # Load forces vertices and pointclouds from sequence folder
-    seq_folder = join(DATA_FOLDER, 'sequences', seq_name)
+    seq_folder = join(DATA_FOLDER, 'sequences', model, seq_name)
 
     forces_vertices = np.load(
         join(seq_folder, f'forces-vertices-{which_mesh}.npy')

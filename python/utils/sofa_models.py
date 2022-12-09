@@ -11,14 +11,14 @@ import Sofa.Core
 import SofaCaribou
 import SofaRuntime
 
-from .elasticity import NoBoundaryCondition
+from .elasticity import DirichletBoundaryCondition
 
 
 class LinearElasticModel:
     """Linear elastic model with constant stiffness matrix."""
 
     def __init__(self, mesh_filename: str, young_modulus: float,
-                 poisson_ratio: float, bc=NoBoundaryCondition()):
+                 poisson_ratio: float, bc: DirichletBoundaryCondition):
 
         # Import necessary plugins
         SofaRuntime.importPlugin('SofaComponentAll')

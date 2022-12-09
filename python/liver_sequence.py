@@ -46,7 +46,8 @@ wrapper = ScipyWrapper(problem, save_folder=None, verbose=False)
 ###############################################################################
 # Load ground truth forces
 true_forces = np.load(
-    os.path.join(liver.DATA_FOLDER, 'sequences', seq_name, 'true-forces.npy')
+    os.path.join(liver.DATA_FOLDER, 'sequences', 'linear', seq_name,
+                 'true-forces.npy')
 )
 
 # Initialize optimization

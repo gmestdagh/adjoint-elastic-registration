@@ -28,9 +28,11 @@ It refers to Section 3.2 in the paper.
 
 * `mesh-default` is the mesh that was used to generate the point clouds.
 * `mesh-remeshed` is the mesh that was used to estimate the resultant force.
-* `sequences` contains the five sequences `s1, ..., s5` of point clouds 
+* `sequences/linear` contains the five sequences `s1, ..., s5` of point clouds 
   mentioned in the paper, along with the true force used to generate point 
   clouds, the true position of the `default` mesh and the vertices on which 
   the true force has been applied to create a deformation.
   For each sequence, the vertices where reconstructed forces apply are also 
   specified.
+* `sequences/neohookean` contains five sequences like above, generated using a
+  Neo-Hookean model (`E=4500`, `nu=0.49`).
