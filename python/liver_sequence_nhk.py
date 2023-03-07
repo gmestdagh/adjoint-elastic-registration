@@ -1,8 +1,8 @@
 """Estimate a sequence of local forces applied on the liver.
 
-This script is used to generate the results in section 3.2 of our paper.
-The average update time and number of iterations are displayed at the end of
-the procedure.
+Data generation and surface forces reconstruction both involve a
+Neo-Hookean elastic model, resulting in a much larger execution time
+than liver_sequence.py.
 """
 import os
 import numpy as np
