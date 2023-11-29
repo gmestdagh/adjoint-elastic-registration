@@ -8,11 +8,11 @@ DATA_FOLDER = join(dirname(__file__), '../../../data/sphere')
 RESULTS_FOLDER = join(dirname(__file__), '../../../results/sphere')
 
 
-def load():
+def load(mesh_format='msh'):
     """Load sphere test dataset."""
 
     # Load mesh
-    mesh_filename = join(DATA_FOLDER, f'sphere.msh')
+    mesh_filename = join(DATA_FOLDER, f'sphere.{mesh_format}')
 
     # Load Dirichlet indices
     dirichlet_filename = join(DATA_FOLDER, 'dirichlet-vertices.npy')
