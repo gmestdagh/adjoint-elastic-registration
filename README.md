@@ -14,19 +14,38 @@ optimization procedure to perform elastic registration from partial surface
 data.
 Our procedures only involve linear elasticity.
 Some simple examples are provided to understand how it works, along with
-utilities to prepare results for vizualization 
+utilities to prepare results for visualisation 
 (with [Paraview](https://www.paraview.org/) for instance).
+
+### Install the conda environment
+
+To run the example scripts, you will need an installation of Python with the
+packages `numpy`, `scipy`, `matplotlib`, `meshio`, `trimesh`, `rtree` and
+`fenics` installed.
+Due to recent changes in the `trust-constr` optimization method from
+`scipy.optimize`, scripts involving a non-linear elastic model
+(`liver_sequence_nhk.py`) seems to work better with versions of `scipy` up to
+1.10.
+
+You can install the required packages by using the conda environment file
+provided in the repository.
+
+First, clone the repository, then install the Conda environment from the
+configuration file:
+```bash
+$ git clone https://github.com/gmestdagh/adjoint-elastic-registration
+$ cd adjoint-elastic-registration
+$ conda env create -n adjoint-registration -f environment.yaml
+```
 
 ### Run a simple example
 
-You will need an installation of Python with the packages `numpy`, `scipy`, 
-`matplotlib`, `meshio`, `trimesh`, `rtree` installed.
+Examples scripts are located in the `python` folder
 
-First, clone the repository, then run the first example:
+To run the first example:
 ```bash
-$ git clone https://github.com/gmestdagh/elastic-organ-registration.git
-$ cd elastic-organ-registration/python
-$ python3 sphere_simple.py
+$ cd python
+$ python sphere_simple.py
 
  iter              f          gnorm        |x|_inf          f_pos          f_frc   feval           time
     0   5.760117e-02   3.071415e+00   0.000000e+00   5.760117e-02   0.000000e+00       1          0.000
@@ -60,7 +79,7 @@ finite element package is necessary to run them.
 
 * `liver_sequence.py`: Test case presented in section 3.2 of 
   [the paper](https://hal.inria.fr/hal-03691913). The resultant force is
-  updated for a series of 50 successive pointclouds and compared to the ground
+  updated for a series of 50 successive point clouds and compared to the ground
   truth. 
   No deformed is saved for this test case but the summary of successive 
   estimations is printed in the console.
@@ -75,11 +94,10 @@ finite element package is necessary to run them.
 
 * `liver_sequence_nhk.py`: Same as `liver_sequence.py`, but the dataset and the
   reconstruction both feature a Neo-Hookean model for deformations.
-  To run this case, you should have the Dolfin package installed (the old one, 
-  not dolfinx).
+  This scripts requires that you have `fenics` installed in your environment.
   Note that this case is very slow and takes several hours to complete.
   You should consider running it during the night. 
-  Also, do not worry about the "Newton solver did not converge warning", the
+  Also, do not worry about the "Newton solver did not converge" warning, the
   residual tolerance has been set very tight on purpose.
 
 As the access to the Sparse Data Challenge dataset is restricted by the
@@ -100,9 +118,11 @@ Our datasets come with precomputed stiffness matrices.
 However, to play with elastic parameters, it is more convenient to have a finite
 element package compute the stiffness matrix during script execution.
 
-For this reason, we provide a class in `python/utils/sofa_models.py` which
-assembles the stiffness matrix using the [SOFA](https://www.sofa-framework.org/)
-framework.
+For this reason, we provide a class in `python/utils/fenics_models.py` which
+assembles the stiffness matrix using FEniCS.
+
+We also provide a class in `python/utils/sofa_models.py` which  assembles the
+stiffness matrix using the [SOFA](https://www.sofa-framework.org/) framework.
 To use it, you will need to install
 * [SOFA](https://www.sofa-framework.org/) (v20.12)
 * [SofaPython3](https://github.com/sofa-framework/sofapython3). If you compile
